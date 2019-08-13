@@ -1,0 +1,77 @@
+{
+  "streamAction": "SubmitNewList",
+  "inquiryList": {
+    "listId": "",
+    "state": "Str",
+    "binTimeoutSeconds": 1,
+    "itemProcessedCount": 1,
+    "itemCount": 1,
+    "inquiries": [
+      {
+        "inquiryId": "",
+        "state": "Str",
+        "instrumentName": "MSFT 4252",
+        "listId": "303030",
+        "quotes": [
+          {
+            "inquiryId": "",
+            "quoteAmount": "",
+            "dealerId": 1
+          }
+        ]
+      },
+      {
+        "inquiryId": "",
+        "state": "Str",
+        "instrumentName": "JCP 3420",
+        "listId": "303030",
+        "quotes": [
+          {
+            "inquiryId": "",
+            "quoteAmount": "",
+            "dealerId": 1
+          }
+        ]
+      },
+      {
+        "inquiryId": "",
+        "state": "Str",
+        "instrumentName": "DAPL 1953",
+        "listId": "303030",
+        "quotes": [
+          {
+            "inquiryId": "",
+            "quoteAmount": "",
+            "dealerId": 1
+          }
+        ]
+      },
+      {
+        "inquiryId": "",
+        "state": "Str",
+        "instrumentName": "MCD 7427",
+        "listId": "303030",
+        "quotes": [
+          {
+            "inquiryId": "",
+            "quoteAmount": "",
+            "dealerId": 1
+          }
+        ]
+      },
+      {
+        "inquiryId": "",
+        "state": "Str",
+        "instrumentName": "MCD 3269",
+        "listId": "303030",
+        "quotes": [
+          {
+            "inquiryId": "",
+            "quoteAmount": "",
+            "dealerId": 1
+          }
+        ]
+      }
+    ]
+  }
+}

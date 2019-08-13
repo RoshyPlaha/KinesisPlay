@@ -1,0 +1,101 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: products-api
+
+custom:
+  InquiryItemTableName: 'inquiry-item-${self:provider.stage}'
+  InquiryListTableName: 'inquiry-list-${self:provider.stage}'
+  RoshTestStreamName: 'rosh-stream-${self:provider.stage}'
+
+provider:
+  name: aws
+  runtime: java8
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - kinesis:*
+      Resource:
+        - { "Fn::GetAtt": ["InquiryItemDynamoDBTable", "Arn" ]}
+        - { "Fn::GetAtt": ["InquiryListDynamoDBTable", "Arn" ]}
+        - { "Fn::GetAtt": ["KinesisStream", "Arn" ]}
+
+  environment:
+    INQUIRY_ITEM_TABLE_NAME: ${self:custom.InquiryItemTableName}
+    INQUIRY_LIST_TABLE_NAME: ${self:custom.InquiryListTableName}
+    ROSH_TEST_STREAM_NAME: ${self:custom.RoshTestStreamName}
+    AWS_CBOR_DISABLE: true
+
+
+package:
+  artifact: 'target/${self:service}-${self:provider.stage}.jar'
+
+functions:
+  porfolioInquiry:
+      handler: com.serverless.handler.PortfolioHandler
+      events:
+        - http:
+            path: /portfolioInquiry
+            method: post
+  KPHandler:
+      handler: com.serverless.handler.KPHandler
+
+resources:
+  Resources:
+    InquiryItemDynamoDBTable:
+          Type: AWS::DynamoDB::Table
+          Properties:
+            TableName: ${self:custom.InquiryItemTableName}
+            AttributeDefinitions:
+              - AttributeName: inquiryId
+                AttributeType: S
+              - AttributeName: listId
+                AttributeType: S
+            KeySchema:
+              - AttributeName: inquiryId
+                KeyType: HASH
+              - AttributeName: listId
+                KeyType: RANGE
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1
+    InquiryListDynamoDBTable:
+          Type: AWS::DynamoDB::Table
+          Properties:
+            TableName: ${self:custom.InquiryListTableName}
+            AttributeDefinitions:
+              - AttributeName: listId
+                AttributeType: S
+#              - AttributeName: itemProcessedCount
+#                AttributeType: N
+            KeySchema:
+              - AttributeName: listId
+                KeyType: HASH
+#              - AttributeName: itemProcessedCount
+#                KeyType: RANGE
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1
+    KinesisStream:
+          Type: AWS::Kinesis::Stream
+          Properties:
+            Name: ${self:custom.RoshTestStreamName}
+            ShardCount: 1

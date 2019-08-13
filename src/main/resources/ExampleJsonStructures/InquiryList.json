@@ -1,0 +1,38 @@
+{
+  "streamAction": "SubmitNewList",
+  "inquiryList": {
+    "listId": "",
+    "state": "Str",
+    "binTimeoutSeconds": 1,
+    "itemProcessedCount": 1,
+    "itemCount": 1,
+    "inquiries": [
+      {
+        "inquiryId": "",
+        "state": "Str",
+        "instrumentName": "Rosh3Instrument",
+        "listId": "303030",
+        "quotes": [
+          {
+            "inquiryId": "",
+            "quoteAmount": "",
+            "dealerId": 1
+          }
+        ]
+      },
+      {
+        "inquiryId": "",
+        "state": "Str",
+        "instrumentName": "Rosh3Instrument",
+        "listId": "303030",
+        "quotes": [
+          {
+            "inquiryId": "",
+            "quoteAmount": "",
+            "dealerId": 1
+          }
+        ]
+      }
+    ]
+  }
+}

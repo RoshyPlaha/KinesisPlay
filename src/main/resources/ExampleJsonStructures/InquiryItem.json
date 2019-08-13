@@ -1,0 +1,16 @@
+{
+  "streamAction": "SubmitNewInquiry",
+  "inquiryItem": {
+    "inquiryId": "",
+    "state": "Str",
+    "instrumentName": "RoshInstrument",
+    "listId": "101010",
+    "quotes": [
+      {
+        "inquiryId": "",
+        "quoteAmount": "",
+        "dealerId": 1
+      }
+    ]
+  }
+}
